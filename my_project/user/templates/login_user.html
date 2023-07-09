@@ -1,0 +1,26 @@
+{%extends 'layout_main.html'%}
+{%block content%}
+<style>
+   input[type=text] ,button,input[type=password]{
+   width: 50%;
+   padding: 10px 15px;
+   margin-right: 350px;
+   margin-bottom: 20px;
+   
+   box-sizing: border-box;
+}
+</style>
+<form action="{%url  'login_user'%}"  method="POST" style="direction: rtl; " >
+   <h1 style="display: flex; justify-content: center;"> התחברות </h1>
+    {%csrf_token%}
+ <div style="margin-top: 150px;">
+    <input type="text" placeholder="שם משתמש " name="username">
+ </div>
+ <div>
+    <input type="password" placeholder="סיסמא" name="password" >
+ </div>
+ <div>
+    <button type="submit">Login</button>
+ </div>
+</form>
+{%endblock content%}

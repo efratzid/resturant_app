@@ -1,0 +1,18 @@
+{%extends 'layout_user.html'%}
+{%block content%}
+<form action="{%url 'user_category'%}"  style="direction: rtl;">
+    {%csrf_token%}
+  <div style="display: flex; flex-wrap: wrap;justify-content: center;">
+      {% for category in category_list%}
+        <div class="card" style="width: 18rem;margin:10px;padding:20px;font-size: small; ">
+          <img src="{{category.imageUrl}}" class="card-img-top" >
+        <div class="card-body">
+          <a href="{% url 'user_dish' id=category.id %}"><h5 class="card-title">{{category.name}}</h5></a>
+        </div>
+      </div>
+    {%endfor%}
+  </div>
+    <a href="{%url 'change_details' id=request.user.id%}">שינוי פרטים</a>
+    
+</form>     
+{%endblock%}

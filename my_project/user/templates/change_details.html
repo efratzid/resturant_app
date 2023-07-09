@@ -1,0 +1,45 @@
+{%extends 'layout_user.html'%}
+{%block content%}
+<style>
+    input[type=text] ,button,input[type=checkbox],label{
+    width: 50%;
+    padding: 10px 10px;
+    margin-right: 350px;
+    margin-bottom: 8px;
+    
+    box-sizing: border-box;
+}
+</style>
+<form action="{% url 'change_details' id=request.user.id%}" method="POST" style="direction: rtl;">
+
+    {%csrf_token%}
+    <h3>שינוי פרטים</h3>
+    <div>
+        
+        <input type="text" value="{{user.username}}" name="username">  
+    </div>
+    <div>
+       
+        <input type="text" value="{{user.password}}" name="password">  
+    </div>
+    <div>
+        
+        <input type="text" value="{{user.first_name}}" name="first_name">  
+    </div>
+    <div>
+        
+        <input type="text" value="{{user.last_name}}" name="last_name">  
+    </div>
+    <div>
+        
+        <input type="text" value="{{user.email}}" name="email">  
+    </div>
+    <div>
+        <label>האם אתה מנהל?<input type="checkbox" name="is_staff"></label>
+    </div>
+
+     <div>
+         <button type="submit">שמור</button>    
+     </div>
+</form>
+{%endblock%}

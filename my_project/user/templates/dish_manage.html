@@ -1,0 +1,31 @@
+{%extends 'layout_manage.html'%}
+{%block content%}
+<form action="{%url 'dish_manage'%}"  style="direction: rtl;">
+  <h1 style="display: flex; justify-content: center;">המנות שלנו</h1>
+  <a href="{% url 'add_dish' %}"><button type="button" class="btn btn-primary btn-lg">הוספת מנה</button></a>
+  <a href="{% url 'category_manage' %}"><button type="button" class="btn btn-primary btn-lg">לקטגוריות שלנו</button></a>
+  <div style="display: flex; flex-wrap: wrap;justify-content: center;">
+    {%for dish in dishes%}
+    <div class="card card border-dark mb-3" style="width: 18rem;margin:10px;padding:20px;font-size: small; ">
+        <img src="{{dish.imageUrl}}" class="card-img-top" >
+        <div class="card-body">
+        {%if dish.is_vegetarian == 0 %}
+          <h5 class="card-title">{{dish.name}}      -  {{dish.price}}₪    </h5>
+          {%else%}
+        <h5 class="card-title">{{dish.name}}      -  {{dish.price}}₪    🌱</h5>
+        {%endif%}
+        {%if dish.is_gloten_free == 0%}
+        <div style="font-family: Arial, Helvetica, sans-serif;font-size: medium;">•המנה אינה מכילה גלוטן</div>
+          {%else%}
+        <div style="font-family: Arial, Helvetica, sans-serif;font-size: medium;">•המנה מכילה גלוטן</div>
+        {%endif%}
+          <p class="card-text">{{dish.description}}</p>
+          <a href="{% url 'edit_dish' id=dish.id %}" class="btn btn-primary"><i class="material-icons">edit</i></a>
+          <a href="{%url 'delete_dish' id=dish.id%}" class="btn btn-primary"><i class="material-icons">delete</i></a>
+        </div>
+      </div>
+    {%endfor%}
+  </div>
+</form>     
+{%endblock%}
+<!-- style="width: 18rem; margin: 20px; padding: 25px;font-size: 30px; -->

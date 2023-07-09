@@ -1,0 +1,53 @@
+
+
+<style>
+    form {
+      margin: 100px;
+    }
+    th {
+      width: 80px;
+      color:red;
+    }
+  </style>
+{%extends 'layout_manage.html'%}
+{% block content%}
+  <form>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <h3
+      style="
+        color:black;
+        text-align: center;
+        margin-top: 15px;
+        padding: 15px;
+      "
+    >
+      <b >ניהול הזמנות</b>
+    </h3>
+    <table class="w3-table-all w3-bordered w3-striped w3-centered">
+      <tr>
+        <th>מס' הזמנה</th>
+        <th>קוד לקוח</th>
+        <th>קוד עגלה</th>
+        <th>תאריך הזמנה</th>
+        <th>המשלוח הגיע?</th>
+      </tr>
+      {%for order in orders%}
+      <tr>
+        <td>{{order.order_id}}</td>
+        <td>{{order.order.user.id}}</td>
+        <td>{{order.order_id}}</td>
+        <td>{{order.created}}</td>
+        <td>
+          {%if order.is_delivered == 0 %}
+          <input type="checkbox"/>
+          נשלח 
+          {%else%}
+          <input type="checkbox" checked />
+          נשלח {%endif%}
+        </td>
+      </tr>
+      {%endfor%}
+    </table>
+  </form>
+ 
+{%endblock content%}

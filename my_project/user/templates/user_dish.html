@@ -1,0 +1,30 @@
+{%extends 'layout_user.html'%}
+{%block content%}
+<form action="{%url 'user_dish'  id=category.id%}"  style="direction: rtl;">
+    {%csrf_token%}
+    <h1 style="display: flex; justify-content: center;">{{dish.category.id}}</h1>
+    <div style="display: flex; flex-wrap: wrap;justify-content: center;">
+    {% for dish in dishes_list%}
+        {%if dish.category.id == category.id%}
+        <div class="card card border-dark mb-3" style="width: 18rem; margin:10px;padding:20px;font-size: small; ">
+            <img src="{{dish.imageUrl}}" class="card-img-top" >
+            <div class="card-body">
+              {%if dish.is_vegetarian == True or '1'%}
+                <h5 class="card-title">{{dish.name}}      -  {{dish.price}}₪    🌱</h5>
+              {%else%}
+                <h5 class="card-title">{{dish.name}}      -  {{dish.price}}₪    </h5>
+              {%endif%}
+              {%if dish.is_gloten_free == True%}
+                <div style="font-family: Arial, Helvetica, sans-serif;font-size: medium;">•המנה מכילה גלוטן</div>
+              {%endif%}
+              
+              <p class="card-text">{{dish.description}}</p>
+              <a href="{% url 'cart' id=dish.id %}" class="btn btn-primary">הוסף לעגלה</a>
+              
+            </div>
+          </div>
+        {%endif%}
+    {%endfor%}
+    </div>
+</form>     
+{%endblock%}

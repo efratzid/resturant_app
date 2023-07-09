@@ -1,0 +1,47 @@
+{%extends 'layout_main.html'%}
+{% block content%}
+<style>
+    input[type=text] ,button,input[type=email]{
+    width: 50%;
+    padding: 10px 10px;
+    margin-right: 350px;
+    margin-bottom: 8px;
+    
+    box-sizing: border-box;
+}
+
+</style>
+<form action="{% url 'signup' %}" method="POST" style="direction: rtl;" >
+    <h1 style="display: flex; justify-content: center;">הרשמה</h1>   
+{%csrf_token%}
+<div >
+    
+    <div style="margin-top: 100px;">
+        <input type="text"  placeholder="שם משתמש" name='username' required>
+    </div>
+
+    <div >
+        <input type="text"  placeholder="סיסמה" name='password'  minlength="3" maxlength="16" pattern="[1-9]+" title="השדה חייב להכיל רק מספרים  >
+
+    </div>
+
+    <div>
+        <input type="text" placeholder="שם פרטי" name="firstname"  minlength="2" maxlength="16" pattern="[א-תa-zA-Z]+" title="השדה חייב להכיל רק אותיות ">
+    </div>
+
+    <div>
+        <input type="text" placeholder="שם משפחה" name="lastname"  minlength="2" maxlength="16" pattern="[א-תa-zA-Z]+" title="השדה חייב להכיל רק אותיות ">
+    </div>
+    
+    <div>
+        <input type="email" placeholder="אימייל" name="email" required>
+    </div>
+    <div  style="margin-right: 350px;" >
+        <input type="checkbox" name="is_staff"><label>האם אתה מנהל?</label>
+    </div>
+    <div>
+        <button type="submit">הרשמה</button>
+    </div>
+</div>
+</form>
+{%endblock content%}

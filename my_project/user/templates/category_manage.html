@@ -1,0 +1,26 @@
+{%extends 'layout_manage.html'%}
+{%block content%}
+<form action="{%url 'category_manage'%}"  style="direction: rtl;">
+    {%csrf_token%}
+    <h1  style="display: flex; justify-content: center;">הקטגוריות שלנו</h1>
+    <a href="{% url 'add_category' %}"><button type="button" class="btn btn-primary btn-lg">הוספת קטגוריה</button></a>
+    <a href="{% url 'dish_manage' %}"><button type="button" class="btn btn-primary btn-lg">למנות שלנו</button></a>
+
+    <div style="display: flex; flex-wrap: wrap;justify-content: center;">
+    {% for category in category_list%}
+    
+      <div class="card " style="width: 18rem; margin: 20px; padding: 25px;font-size: 30px; " >
+        <img src="{{category.imageUrl}}" class="card-img-top" >
+        <div class="card-body">
+          <h5 class="card-title">{{category.name}}</h5>
+          <a href="{% url 'edit_category' id=category.id %}" class="btn btn-primary"><i class="material-icons">edit</i></a>
+          <a href="{%url 'delete_category' id=category.id%}" class="btn btn-primary"> <i class="material-icons">delete</i></a>
+        </div>
+      </div>
+   
+    
+    {%endfor%}
+  </div>
+
+</form>     
+{%endblock%}

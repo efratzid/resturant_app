@@ -1,0 +1,50 @@
+{%extends 'layout_manage.html'%}
+{% block content%}
+<style>
+    input[type=text] ,button{
+    width: 50%;
+    padding: 10px 10px;
+    margin-right: 350px;
+    margin-bottom: 8px;
+    
+    box-sizing: border-box;
+}
+
+</style>
+
+<form action="{%url 'add_dish'%}" method="POST" style="direction: rtl;">
+    {%csrf_token%}
+    <h1 style="display: flex; justify-content: center;font-family:Arial, Helvetica, sans-serif;margin-top: 50px;margin-bottom: 20px;">הוספת מנה</h1>
+
+    <div>
+       <input type="text" name="name" placeholder="שם המוצר" > 
+    </div>
+    <div>
+        <input type="text" name="price" placeholder="מחיר "> 
+     </div>
+     <div>
+        <input type="text" name="description" placeholder="תיאור המוצר"> 
+     </div>
+     <div>
+        <input type="text" name="imageUrl" placeholder="קישור "> 
+     </div>
+     <div  style="margin-right: 350px;">
+      <select name="categories" class="form-select" aria-label="Default select example" >
+          {% for category in categories %}
+          <option value="{{category.id}}">{{category.name}}</option>
+          {%endfor%}
+      </select>
+   
+   </div>
+     <div  style="margin-right: 350px;">
+        <input type="checkbox" name="is_gloten_free" > ?מכיל גלוטן
+     </div>
+     <div  style="margin-right: 350px;">
+        <input type="checkbox" name="is_vegetarian" > ?צמחוני
+     </div>
+     
+    <div>
+        <button type="submit">הוסף</button>
+    </div>
+    </form>
+{%endblock%}
